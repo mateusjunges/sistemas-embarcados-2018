@@ -1,0 +1,63 @@
+#include <SoftwareSerial.h>
+
+#define PIN_RX        0
+#define PIN_TX        4
+#define PIN_FRENTE    12
+#define PIN_TRAZ      13
+#define PIN_ESQUERDA  14
+#define PIN_DIREITA   15
+
+int frenteLigado = LOW;
+int trazLigado = LOW;
+int esquerdaLigado = LOW;
+int direitaLigado = LOW;
+
+SoftwareSerial serial(PIN_TX, PIN_RX);
+
+void setup()
+{
+  pinMode(PIN_FRENTE, OUTPUT);
+  pinMode(PIN_TRAZ, OUTPUT);
+  pinMode(PIN_ESQUERDA, OUTPUT);
+  pinMode(PIN_DIREITA, OUTPUT);
+
+ Serial.begin(9600);
+}
+
+void loop()
+{
+  if (Serial.available()) {
+    char c = Serial.read();
+    if (c == '1') frenteLigado = HIGH;
+    if (c == '2') direitaLigado = HIGH;
+    if (c == '3') trazLigado = HIGH;
+    if (c == '4') esquerdaLigado = HIGH;
+    if (c == '5'){
+      frenteLigado = HIGH;
+      direitaLigado = HIGH;
+    }
+    if (c == '6'){
+      trazLigado = HIGH;
+      direitaLigado = HIGH;
+    }
+    if (c == '7'){
+      esquerdaLigado = HIGH;
+      trazLigado = HIGH;
+    }
+    if (c == '8'){
+      frenteLigado = HIGH;
+      esquerdaLigado = HIGH;
+    }
+
+    if (c == '0') {
+      frenteLigado = LOW;
+      trazLigado = LOW;
+      esquerdaLigado = LOW;
+      direitaLigado = LOW;
+    }
+  }
+  digitalWrite(PIN_FRENTE, frenteLigado);
+  digitalWrite(PIN_TRAZ, trazLigado);
+  digitalWrite(PIN_ESQUERDA, esquerdaLigado);
+  digitalWrite(PIN_DIREITA, direitaLigado);
+}

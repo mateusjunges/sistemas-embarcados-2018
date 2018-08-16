@@ -9,12 +9,12 @@
 
 //PINAGEM ESP
 #define pinMaxLed 0 //D3
-#define pinMinLed 05 //D1
+#define pinMinLed 5 //D1
 #define pinMaxButton 14 //D5
-#define pinMinButton 9 //sd2
+#define pinMinButton 10 //sd3
 #define pinLedFadeDigital 15 //D6
 #define pinLedFadeAnalogico 04 //D2
-#define pinControl A0 //Analogico
+#define pinControl 17 //Analogico
 
 //GERAL
 #define incremento 1
@@ -61,8 +61,8 @@ void loop(){
   }  
  if(analogRead(pinControl)){
     ledAnalogico = analogRead(pinControl);
-    ledAnalogico = map(ledAnalogico, 0, 1024, 0, 256);
-    Serial.println(ledAnalogico);
+    ledAnalogico = map(ledAnalogico, 0, 1024, 0, 255);
+    //Serial.println(ledAnalogico);
     analogWrite(pinLedFadeAnalogico, ledAnalogico);
     delay(100);
   }  
