@@ -21,13 +21,13 @@ void setup()
   pinMode(PIN_ESQUERDA, OUTPUT);
   pinMode(PIN_DIREITA, OUTPUT);
 
- Serial.begin(9600);
+ serial.begin(9600);
 }
 
 void loop()
 {
-  if (Serial.available()) {
-    char c = Serial.read();
+  if (serial.available()) {
+    char c = serial.read();
     if (c == '1') frenteLigado = HIGH;
     if (c == '2') direitaLigado = HIGH;
     if (c == '3') trazLigado = HIGH;
