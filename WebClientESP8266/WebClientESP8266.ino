@@ -1,12 +1,12 @@
 #include <ESP8266WiFi.h>
 
-const char* ssid = "MyASUS";
-const char* senha = "9a4281138522";
+const char* ssid = "seu ssid";
+const char* senha = "sua senha";
 const String servidor = "192.168.43.49"; // seu servidor
 String path;
 
 int pinoBotao = 0;
-int botao = 0;         // variable for reading the push button status
+int botao = 0;         // variable for reading the pushbotao status
 
 void setup () {
   pinMode(pinoBotao, INPUT);
