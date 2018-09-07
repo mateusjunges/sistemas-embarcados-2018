@@ -10,8 +10,8 @@
 #define TIME_ZONE    -3
 
 // WiFi network info.
-const char* ssid = "ssid";
-const char* senha = "senha";
+const char* ssid = "JUNGES1"; //SSID da sua rede
+const char* senha = "embarcados"; //senha da sua rede
 
 unsigned long contador;         // the debounce time; increase if the output flickers
 unsigned long intervalo = 1000; // Tempo em ms do intervalo a ser utilizado

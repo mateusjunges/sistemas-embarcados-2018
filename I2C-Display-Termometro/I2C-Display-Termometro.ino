@@ -8,8 +8,8 @@
 #define TAMANHO       GEOMETRY_128_32
 
 // WiFi network info.
-const char* ssid = "ssid";
-const char* senha = "senha";
+const char* ssid = "JUNGES1"; //ssid da sua rede
+const char* senha = "embarcados";//senha da sua rede
 
 unsigned long contador;         // Armazena o valor dos milisegundos até o próximo intervalo
 unsigned long intervalo = 1000; // Tempo em ms do intervalo a ser executado
@@ -17,7 +17,6 @@ float temperatura;
 float umidade;
 
 SSD1306Wire display(ENDERECO_OLED, SDA_PIN, SCL_PIN, TAMANHO); // SDA, SCL -> Configuracao do display SSD1306
-
 AM2320 sensor; // Cria uma instancia do sensor AM2320
 
 void setup() {
@@ -30,7 +29,7 @@ void setup() {
   display.display();
   // Mostrar informacao na porta Serial
   Serial.begin(115200);
-  Serial.print("Conectando ");
+  Serial.print("Conectando a");
   Serial.println(ssid);
   WiFi.begin(ssid, senha);
   while (WiFi.status() != WL_CONNECTED) {
@@ -58,13 +57,13 @@ void loop() {
   String infoDisplay; // Variavel que armazena a informacao a ser mostrada no display ou porta serial
   char strDisplay[30]; // Variavel auxiliar para armazenar infoDisplay formatada
   if (millis() - contador > intervalo) {
-    if (sensor.measure()) { // Verifica se o sensor esta operacional para leitura dos valores 
-      temperatura = sensor.getTemperature(); // Obtem o valor de temperatura
-      umidade = sensor.getHumidity(); // Obtem o valor da umidade relativa
+    //if (sensor.measure()) { // Verifica se o sensor esta operacional para leitura dos valores 
+      temperatura = 24;//sensor.getTemperature(); // Obtem o valor de temperatura
+      umidade = 80;//sensor.getHumidity(); // Obtem o valor da umidade relativa
       sprintf(strDisplay, "%.1fºC  -  %.0f%%", temperatura, umidade); // Formata a saida para ser mostrada no display
-    } else {
-      sprintf(strDisplay, "Erro leitura");
-    }
+    //} else {
+    //  sprintf(strDisplay, "Erro leitura");
+    //}
     infoDisplay = strDisplay; // Atualiza o conteudo da informacao para String infoDisplay
     Serial.println(infoDisplay); // Imprime informacao formatada na serial
     // Mostra informacao atualizada da hora no display OLED
