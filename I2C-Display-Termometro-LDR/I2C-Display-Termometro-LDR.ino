@@ -15,8 +15,8 @@
 #define CHANGE_BUTTON 0
 
 //Configurações de conexão na rede WiFi:
-const char* ssid = "JUNGES";
-const char* password = "mateus1234560";
+const char* ssid = "ssid";
+const char* password = "password";
 
 //Variáveis utilizadas no programa:
 unsigned long count; // armazena o valor dos milisegundos até o próximo intervalo
