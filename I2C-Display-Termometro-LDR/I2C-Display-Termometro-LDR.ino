@@ -6,6 +6,7 @@
 
 #define SDA_PIN       4 //pino do SDA
 #define SCL_PIN       5 //pino do SCL
+#define LDR_PIN       17 //Pino do LDR
 #define ENDERECO_OLED 0x3C //endereço do display OLED
 #define TAMANHO       GEOMETRY_128_32 //geometria do display (pode possuir 64 colunas)
 #define TIME_ZONE -3 // Time zone para horário de brasília
@@ -14,8 +15,8 @@
 #define CHANGE_BUTTON 0
 
 //Configurações de conexão na rede WiFi:
-const char* ssid = "JUNGES1";
-const char* password = "embarcados";
+const char* ssid = "JUNGES";
+const char* password = "mateus1234560";
 
 //Variáveis utilizadas no programa:
 unsigned long count; // armazena o valor dos milisegundos até o próximo intervalo
@@ -25,7 +26,9 @@ float humity;       //humidade
 const int max_time = 30000; //tempo máximo para tentar conectar no wifi
 bool showtemperature = false;
 bool showhours = false;
-bool estadoDisplay = false;
+bool displayState = false;
+
+int brightness = 0; //Brilho do display
 
 int outputState = HIGH;      // estado atual da saída
 int buttonState;             // estado do botão no pino CHANGE_BUTTON
@@ -48,6 +51,7 @@ AM2320 sensor; // Cria uma instancia do sensor AM2320
 void setup() {//config
 
   pinMode(CHANGE_BUTTON, INPUT_PULLUP);
+  pinMode(LDR_PIN, INPUT);
 
   Serial.begin(115200); //inicia comunicação serial
 
@@ -81,8 +85,13 @@ void setup() {//config
 }
 
 void loop() {
-  if(digitalRead(CHANGE_BUTTON) == LOW){
-    estadoDisplay = !estadoDisplay;
+
+  brightness = analogRead(LDR_PIN);
+  int map_brightness = map(brightness, 0, 1024, 0, 100);
+  Serial.println(map_brightness);
+  display.setBrightness(map_brightness);
+  if (digitalRead(CHANGE_BUTTON) == LOW) {
+    displayState = !displayState;
   }
   changeDisplay();
 }
@@ -137,9 +146,9 @@ void showTemperature() {
 }
 
 void changeDisplay() {
-  if(estadoDisplay == HIGH){ //high = temperatura, LOW  relogio
+  if (displayState == HIGH) { //high = temperatura, LOW  relogio
     showTemperature();
-  }else{
+  } else {
     showHours();
   }
 }
