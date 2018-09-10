@@ -5257,20 +5257,6 @@ Shiua Chyuan Precision Industrial Co Ltd&lt;br&gt;
 <busses>
 </busses>
 <nets>
-<net name="N$1" class="0">
-<segment>
-<pinref part="ESP-8266" gate="G$1" pin="VIN"/>
-<wire x1="2.54" y1="38.1" x2="-7.62" y2="38.1" width="0.1524" layer="91"/>
-<label x="-7.62" y="38.1" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
-<net name="N$2" class="0">
-<segment>
-<pinref part="ESP-8266" gate="G$1" pin="GND@2"/>
-<wire x1="2.54" y1="40.64" x2="0" y2="40.64" width="0.1524" layer="91"/>
-<label x="0" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
-</segment>
-</net>
 <net name="GND" class="0">
 <segment>
 <pinref part="DISPLAY-OLED" gate="G$1" pin="GND"/>
@@ -5298,6 +5284,11 @@ Shiua Chyuan Precision Industrial Co Ltd&lt;br&gt;
 <wire x1="81.28" y1="-25.4" x2="81.28" y2="-27.94" width="0.1524" layer="91"/>
 <junction x="81.28" y="-27.94"/>
 </segment>
+<segment>
+<pinref part="ESP-8266" gate="G$1" pin="GND@2"/>
+<wire x1="2.54" y1="40.64" x2="0" y2="40.64" width="0.1524" layer="91"/>
+<label x="0" y="40.64" size="1.778" layer="95" rot="R180" xref="yes"/>
+</segment>
 </net>
 <net name="VCC" class="0">
 <segment>
@@ -5315,6 +5306,11 @@ Shiua Chyuan Precision Industrial Co Ltd&lt;br&gt;
 <wire x1="78.74" y1="-22.86" x2="86.36" y2="-22.86" width="0.1524" layer="91"/>
 <pinref part="P+1" gate="VCC" pin="VCC"/>
 <wire x1="86.36" y1="-22.86" x2="86.36" y2="-17.78" width="0.1524" layer="91"/>
+</segment>
+<segment>
+<pinref part="ESP-8266" gate="G$1" pin="VIN"/>
+<wire x1="2.54" y1="38.1" x2="-7.62" y2="38.1" width="0.1524" layer="91"/>
+<label x="-7.62" y="38.1" size="1.778" layer="95" rot="R180" xref="yes"/>
 </segment>
 </net>
 <net name="GPIO-04" class="0">
