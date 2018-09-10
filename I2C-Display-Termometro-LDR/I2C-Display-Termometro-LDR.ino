@@ -22,7 +22,7 @@ const char* password = "password";
 unsigned long count; // armazena o valor dos milisegundos até o próximo intervalo
 unsigned long interval = 1000; //Tempo em milisegundos do intervalo
 float temperature;  //temperatura
-float humity;       //humidade
+float humity;       //umidade
 const int max_time = 30000; //tempo máximo para tentar conectar no wifi
 bool showtemperature = false;
 bool showhours = false;
