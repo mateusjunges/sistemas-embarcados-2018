@@ -15,8 +15,8 @@
 #define CHANGE_BUTTON 0
 
 //Configurações de conexão na rede WiFi:
-const char* ssid = "ssid";
-const char* password = "password";
+const char* ssid = "JUNGES";
+const char* password = "mateus1234560";
 
 //Variáveis utilizadas no programa:
 unsigned long count; // armazena o valor dos milisegundos até o próximo intervalo
@@ -75,8 +75,8 @@ void setup() {//config
   display.setFont(ArialMT_Plain_10);
   display.drawString(display.getWidth() / 2, 18, "IP: " + WiFi.localIP().toString());
   display.display();
-  Serial.println("IP: ");
-  Serial.print(WiFi.localIP());
+  Serial.print("IP: ");
+  Serial.println(WiFi.localIP());
 
   horaCliente.begin();
   sensor.begin(SDA_PIN, SCL_PIN); // Conecta o sensor AM2320 ao barramento I2C - SDA, SCL
@@ -88,7 +88,7 @@ void loop() {
 
   brightness = analogRead(LDR_PIN);
   int map_brightness = map(brightness, 0, 1024, 0, 100);
-  Serial.println(map_brightness);
+  //Serial.println(map_brightness);
   display.setBrightness(map_brightness);
   if (digitalRead(CHANGE_BUTTON) == LOW) {
     displayState = !displayState;
@@ -122,13 +122,13 @@ void showTemperature() {
   String infoDisplay; // Variavel que armazena a informacao a ser mostrada no display ou porta serial
   char strDisplay[30]; // Variavel auxiliar para armazenar infoDisplay formatada
   if (millis() - count > interval) {
-    //if (sensor.measure()) { // Verifica se o sensor esta operacional para leitura dos valores
+    if (sensor.measure()) { // Verifica se o sensor esta operacional para leitura dos valores
     temperature = 24;//sensor.getTemperature(); // Obtem o valor de temperatura
     humity = 80;//sensor.getHumidity(); // Obtem o valor da umidade relativa
     sprintf(strDisplay, "%.1fºC  -  %.0f%%", temperature, humity); // Formata a saida para ser mostrada no display
-    //} else {
-    //  sprintf(strDisplay, "Erro leitura");
-    //}
+    } else {
+      sprintf(strDisplay, "Erro leitura");
+    }
     infoDisplay = strDisplay; // Atualiza o conteudo da informacao para String infoDisplay
     Serial.println(infoDisplay); // Imprime informacao formatada na serial
     // Mostra informacao atualizada da hora no display OLED
