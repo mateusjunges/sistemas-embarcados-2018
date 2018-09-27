@@ -2,17 +2,14 @@
 
 #define numero_servos 3
 
-int pino_servos[3] = {8, 7, 4};
-
 Servo servos[numero_servos];  // Criacao de um objeto servo para controle
 
 int pinoDIG = 12; // Pino digital para controle de um dos servos
-
+int pino_servos[numero_servos] = {8, 7, 4}; //pinos para os servos
 int pinoPOT = 0; // Potenciometro para controle dos servos   
-
-int minServo[3] = {40, 30, 20};
-int maxServo[3] = {80, 60, 45};
-int valorServo[3] = {41, 31, 21};
+int minServo[numero_servos] = {40, 30, 20};
+int maxServo[numero_servos] = {80, 60, 45};
+int valorServo[numero_servos] = {41, 31, 21};
 int incremento[3] = {1, 1, 1};
 
 void setup() {
@@ -20,7 +17,6 @@ void setup() {
   	pinMode(pino_servos[n], OUTPUT);
   }
   pinMode(pinoDIG, OUTPUT);
-  
   //Relaciona os servos com seus devidos pinos:
   for(int n = 0; n < numero_servos; n++){
   	servos[n].attach(pino_servos[n]);
