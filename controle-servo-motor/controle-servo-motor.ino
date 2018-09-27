@@ -4,7 +4,7 @@
 
 int pino_servos[3] = {8, 7, 4};
 
-Servo servos[3];  // Criacao de um objeto servo para controle
+Servo servos[numero_servos];  // Criacao de um objeto servo para controle
 
 int pinoDIG = 12; // Pino digital para controle de um dos servos
 
