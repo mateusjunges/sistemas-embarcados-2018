@@ -19,11 +19,8 @@ void setup() {
   for(int n = 0; n < numero_servos; n++){
   	pinMode(pino_servos[n], OUTPUT);
   }
-  //pinMode(pinoServo0, OUTPUT);
   pinMode(pinoDIG, OUTPUT);
-  //pinMode(pinoServo1, OUTPUT);
-  //pinMode(pinoServo2, OUTPUT);
- 
+  
   //Relaciona os servos com seus devidos pinos:
   for(int n = 0; n < numero_servos; n++){
   	servos[n].attach(pino_servos[n]);
