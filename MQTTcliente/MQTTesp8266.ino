@@ -14,8 +14,10 @@
 #include <ESP8266WiFi.h>
 #include <PubSubClient.h>
 
-const char* ssid = "wirelessROBOTICA";
-const char* senha = "********";
+#define connection_port 1883
+
+const char* ssid = "MyASUS";
+const char* senha = "9a4281138522";
 
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 
@@ -78,7 +80,7 @@ void setup() {
   Serial.println("Use este endereço para conectar ao ESP8266");
   Serial.println();
   // Conexao com broker no servidor MQTT
-  clienteMQTT.setServer(mqtt_server, 1883);
+  clienteMQTT.setServer(mqtt_server, connection_port);
   // Definicao do procedimento de recebimento de mensagens
   clienteMQTT.setCallback(callback);
 }

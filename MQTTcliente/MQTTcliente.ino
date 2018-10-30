@@ -17,6 +17,7 @@
 // Configuracoes iniciais
 #define pinoBotao 0
 #define pinoLED   BUILTIN_LED
+#define connection_port 1883
 
 typedef struct // Cria uma STRUCT para armazenar os dados dos botoes
 {
@@ -30,8 +31,10 @@ typedef struct // Cria uma STRUCT para armazenar os dados dos botoes
 unsigned long tempoAnteriorDebounce = 0;
 unsigned long debounceDelay = 50;   // tempo do debounce time; aumentar se saida oscila
 
-const char* ssid = "wirelessROBOTICA";
-const char* senha = "*********";
+//const char* ssid = "wirelessROBOTICA";
+//const char* senha = "*********";
+const char* ssid = "MyASUS";
+const char* senha = "9a4281138522";
 
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 const char* topico = "Sistemas.Embarcados.Topico.Entrada";
@@ -105,7 +108,8 @@ void setup() {
   strMacAddress = WiFi.macAddress();
   strMacAddress.toCharArray(macAddress,6);
   // Conexao com broker no servidor MQTT
-  clienteMQTT.setServer(mqtt_server, 1883);
+  
+  clienteMQTT.setServer(mqtt_server, connection_port);
   // Definicao do procedimento de recebimento de mensagens
   clienteMQTT.setCallback(callback);
 }
