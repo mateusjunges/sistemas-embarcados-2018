@@ -24,9 +24,9 @@ unsigned long tempoAnteriorDebounce = 0;
 unsigned long debounceDelay = 50;   // tempo do debounce time; aumentar se saida oscila
 
 const char* ssid = "wirelessROBOTICA";
-const char* senha = "mecatronica";
+const char* senha = "*********";
 
-const char* mqtt_server = "iot.eclipse.org";
+const char* mqtt_server = "broker.mqtt-dashboard.com";
 const char* topico = "Sistemas.Embarcados.Topico.Entrada";
 
 WiFiClient clienteWIFI;
