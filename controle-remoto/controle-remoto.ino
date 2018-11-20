@@ -37,8 +37,8 @@ unsigned long debounceDelay = 50;   // tempo do debounce time; aumentar se saida
 /**
 Configuração wifi
 **/
-const char* ssid = "JUNGES";
-const char* password = "mateus1234560";
+const char* ssid = "ssid";
+const char* password = "password";
 
 /**Configuração MQTT*/
 const char* mqtt_server = "broker.mqtt-dashboard.com";
