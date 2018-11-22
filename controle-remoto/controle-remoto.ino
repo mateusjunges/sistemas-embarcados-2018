@@ -11,10 +11,6 @@
 
 // Controles basicos TV Samsung
 #define POWER             0xE0E040BF // Ligar/Desligar 
-#define VOLUME_UP         0xE0E0E01F // Vol +
-#define VOLUME_DOWN       0xE0E0D02F // Vol -
-#define CHANNEL_UP        0xE0E048B7 // Ch +
-#define CHANNEL_DOWN      0xE0E008F7 // Ch -
 #define VOLUME_UP_PIN     16
 #define VOLUME_DOWN_PIN   05
 #define CHANNEL_UP_PIN    04
@@ -22,10 +18,15 @@
 
 #define SAMSUNG_BITS  32 // Tamanho do codigo de informacao para o dispositivo Sansung
 
+//Códigos dos botões:
+char* VOLUME_UP = "0xE0E0E01F";
+char* VOLUME_DOWN = "0xE0E0D02F";
+char* CHANNEL_UP = "0xE0E048B7";
+char* CHANNEL_DOWN = "0xE0E008F7";
+
 typedef struct // Cria uma STRUCT para armazenar os dados dos botoes
 {
   int pino;
-  int canal = -1;
   int statusBotao;
   int statusBotaoAnterior = HIGH;
   unsigned long debounceAnterior = 0;
@@ -35,39 +36,39 @@ unsigned long tempoAnteriorDebounce = 0;
 unsigned long debounceDelay = 50;   // tempo do debounce time; aumentar se saida oscila
 
 /**
-Configuração wifi
+  Configuração wifi
 **/
-const char* ssid = "ssid";
-const char* password = "password";
+const char* ssid = "JUNGES";
+const char* password = "mateus1234560";
 
 /**Configuração MQTT*/
 const char* mqtt_server = "broker.mqtt-dashboard.com";
 const char* topico = "Sistemas.Embarcados.Topico.SANSUNG";
 
 char* payload = "";
-  
+
 WiFiClient clienteWIFI;
 PubSubClient clienteMQTT(clienteWIFI);
 
 String stringMacAddress;
 char macAddress[6];
 
-void conectaMQTT(){
-  while(!clienteMQTT.connected()){
+void conectaMQTT() {
+  while (!clienteMQTT.connected()) {
     Serial.print("Aguardando conexao MQTT");
-    if(clienteMQTT.connect(macAddress)){
+    if (clienteMQTT.connect(macAddress)) {
       Serial.println("MQTT conectado");
       clienteMQTT.subscribe(topico);
-    }else{
+    } else {
       Serial.print("Falha, rc=");
       Serial.print(clienteMQTT.state());
       Serial.println(" tentando reconectar em 5 segundos!");
-      delay(5000);  
+      delay(5000);
     }
   }
 }
 
-Botao botao;
+/* Botões para controlar a TV */
 Botao volume_up;
 Botao volume_down;
 Botao channel_up;
@@ -81,7 +82,7 @@ void setup()
   //Conexão WiFi:
   Serial.println("Conectando ao wifi...");
   WiFi.begin(ssid, password);
-  while(WiFi.status() != WL_CONNECTED){
+  while (WiFi.status() != WL_CONNECTED) {
     delay(500);
     Serial.print(".");
   }
@@ -107,11 +108,10 @@ void setup()
 }
 
 void loop() {
-  if(!clienteMQTT.connected()){
+  if (!clienteMQTT.connected()) {
     conectaMQTT();
   }
   clienteMQTT.loop();
-  botao = debounce(botao);
   volume_up = debounce(volume_up);
   volume_down = debounce(volume_down);
   channel_up = debounce(channel_up);
@@ -128,33 +128,24 @@ Botao debounce(Botao b) {
       b.statusBotao = leitura;
       if (b.statusBotao == HIGH) {
         statusLED = !statusLED;
-        switch(b.pino){
+        switch (b.pino) {
           case VOLUME_UP_PIN:
-            payload = "Vol_UP";
+            payload = VOLUME_UP;
             clienteMQTT.publish(topico, payload);
-            Serial.println("Botao volume up");
-            Serial.print(leitura);
-            break;       
+            break;
           case VOLUME_DOWN_PIN:
-            payload = "Vol_DOWN";
+            payload = VOLUME_DOWN;
             clienteMQTT.publish(topico, payload);
-            Serial.println("Botao volume down");
-            Serial.print(leitura);
             break;
           case CHANNEL_UP_PIN:
-            payload = "Canal_UP";
+            payload = CHANNEL_UP;
             clienteMQTT.publish(topico, payload);
-            Serial.println("Botao canal +");
-            Serial.print(leitura);
             break;
           case CHANNEL_DOWN_PIN:
-            payload = "Canal_DOWN";
-            Serial.println("Botao canal -");
-            Serial.print(leitura); 
+            payload = CHANNEL_DOWN;
             clienteMQTT.publish(topico, payload);
             break;
           default:
-            payload = "";
             Serial.println("Botão não encontrado");
             break;
         }
