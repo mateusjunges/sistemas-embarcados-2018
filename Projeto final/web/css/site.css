@@ -1,0 +1,41 @@
+html, body {
+	background-color: white;
+}
+
+nav {
+    margin-bottom: 30px;
+}
+
+#alimentar-button {
+    margin-bottom: 10px;
+}
+
+#historico {
+    margin-top: 10px;
+}
+
+@media (min-width: 1200px){
+	.container {
+    	max-width: 1240px;
+	}
+}
+
+.container-fluid {
+    width: 100%;
+    /* padding-right: 15px; */
+    /* padding-left: 15px; */
+    margin-right: auto;
+    margin-left: auto;
+}
+
+input[type=color].form-control {
+    height: 38px;
+    padding: 1px;
+}
+
+.bg-light {
+    background-color: white!important;
+}
+#botoes{
+    margin-left: 43%;
+}
